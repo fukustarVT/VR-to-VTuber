@@ -13,6 +13,10 @@ The tracking underneath does not change when you flip the switch. Sliders are re
 <img src="icon.png" width="256" alt="VR to VTuber">
 </p>
 
+## Download
+
+[Download here](https://github.com/fukustarVT/VR-to-VTuber/releases/latest)
+
 ## What you need
 
 - Windows
