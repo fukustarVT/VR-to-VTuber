@@ -1,0 +1,4 @@
+python-osc
+websockets
+zeroconf
+openvr
