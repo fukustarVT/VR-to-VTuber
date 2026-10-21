@@ -85,6 +85,7 @@ bridge/osc.py              the VRCFaceTracking receiver
 bridge/outputs/vtube.py    VTube Studio API
 bridge/outputs/ifacial.py  iFacialMocap UDP
 bridge/runner.py           starts the pieces and swaps output live
+bridge/update.py           one GitHub check when the window opens
 ```
 
 ```bash
@@ -93,6 +94,8 @@ python app.py
 ```
 
 `python app.py --ifm` or `python app.py --vts` opens on that side. `python -m bridge.runner` runs without the window.
+
+`VERSION` in `bridge/update.py` is the release you shipped. Publish the exe as a GitHub release whose tag is higher than that, and the window shows "Update available". That line opens the release page. Same or older tags, or no release yet, show nothing.
 
 To build the single file people can double-click, on Windows:
 

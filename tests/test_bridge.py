@@ -12,6 +12,7 @@ from bridge.head import _euler
 from bridge.openxr_head import quat_to_matrix
 from bridge.outputs.ifacial import packet
 from bridge.outputs.vtube import parameter_payload, source_for
+from bridge.update import is_newer
 import bridge.settings as settings
 
 
@@ -115,6 +116,15 @@ class SettingsTests(unittest.TestCase):
         settings.load()
         self.assertEqual(state.destination, "vts")
         self.assertEqual(state.HEAD_GAIN, 0.25)
+
+
+class UpdateTests(unittest.TestCase):
+    def test_only_a_higher_release_counts(self):
+        self.assertTrue(is_newer("v1.2.0", "1.0.0"))
+        self.assertTrue(is_newer("1.0.1", "v1.0.0"))
+        self.assertFalse(is_newer("v1.0.0", "1.0.0"))
+        self.assertFalse(is_newer("0.9.0", "1.0.0"))
+        self.assertFalse(is_newer("latest", "1.0.0"))
 
 
 if __name__ == "__main__":

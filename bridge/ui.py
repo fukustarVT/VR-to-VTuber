@@ -90,12 +90,16 @@ class App(tk.Tk):
         self.subtitle = tk.Label(body, text="", bg=BG, fg=MUTED, font=("Segoe UI", 11), justify="left")
         self.subtitle.pack(anchor="w", padx=24, pady=(0, 12))
 
-        switch = tk.Frame(body, bg=BG)
-        switch.pack(fill="x", padx=24, pady=(0, 4))
+        self.update_lbl = tk.Label(
+            body, text="Update available", bg=BG, fg=AMBER, cursor="hand2",
+            font=("Segoe UI", 11, "underline"),
+        )
+        self.switch = tk.Frame(body, bg=BG)
+        self.switch.pack(fill="x", padx=24, pady=(0, 4))
         self.dest_btns = {}
         for key, label in (("vts", "VTube Studio"), ("ifm", "iFacialMocap")):
             btn = tk.Button(
-                switch, text=label, command=lambda k=key: self.choose(k),
+                self.switch, text=label, command=lambda k=key: self.choose(k),
                 font=("Segoe UI", 12, "bold"), relief="flat", padx=12, pady=8,
             )
             btn.pack(side="left", expand=True, fill="x", padx=(0, 8) if key == "vts" else 0)
@@ -187,6 +191,7 @@ class App(tk.Tk):
         self._sync_widgets()
         self.after(400, self.refresh)
         self.after(50, self._lock_size)
+        self._check_update()
         self.bind("<Configure>", self._guard_size)
         self.protocol("WM_DELETE_WINDOW", self.close)
 
@@ -355,6 +360,22 @@ class App(tk.Tk):
         state.stop_event.set()
         self.running = False
         self._style_run()
+
+    def _check_update(self):
+        def go():
+            from bridge.update import latest_url
+            url = latest_url()
+            if url:
+                self.after(0, lambda: self._show_update(url))
+
+        threading.Thread(target=go, daemon=True).start()
+
+    def _show_update(self, url):
+        if not self.winfo_exists():
+            return
+        self.update_lbl.bind("<Button-1>", lambda _e, u=url: webbrowser.open(u))
+        if not self.update_lbl.winfo_ismapped():
+            self.update_lbl.pack(anchor="w", padx=24, pady=(0, 8), before=self.switch)
 
     def close(self):
         self._persist()
