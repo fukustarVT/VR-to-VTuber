@@ -9,6 +9,7 @@ import bridge.state as state
 from bridge.head import recenter
 from bridge.paths import app_dir
 from bridge.settings import PRESETS, ensure_loaded, read_endpoint, save, set_destination
+from bridge.update import VERSION
 
 BG = "#16161c"
 CARD = "#22222b"
@@ -61,7 +62,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         ensure_loaded()
-        self.title("VR to VTuber")
+        self.title(f"VR to VTuber {VERSION}")
         self.configure(bg=BG)
         self._set_icon()
         self.geometry("560x760")
@@ -86,7 +87,7 @@ class App(tk.Tk):
         self.canvas.bind("<Configure>", lambda e: self.canvas.itemconfigure(self._window, width=e.width))
         self.canvas.bind_all("<MouseWheel>", self._wheel)
 
-        tk.Label(body, text="VR to VTuber", bg=BG, fg=TEXT, font=("Segoe UI", 22, "bold")).pack(anchor="w", padx=24, pady=(22, 2))
+        tk.Label(body, text=f"VR to VTuber {VERSION}", bg=BG, fg=TEXT, font=("Segoe UI", 22, "bold")).pack(anchor="w", padx=24, pady=(22, 2))
         self.subtitle = tk.Label(body, text="", bg=BG, fg=MUTED, font=("Segoe UI", 11), justify="left")
         self.subtitle.pack(anchor="w", padx=24, pady=(0, 12))
 
