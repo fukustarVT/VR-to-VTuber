@@ -17,6 +17,12 @@ The tracking underneath does not change when you flip the switch. Sliders are re
 
 [Download here](https://github.com/fukustarVT/VR-to-VTuber/releases/latest)
 
+## Demo
+
+Here I'm playing the game [POOLS](https://store.steampowered.com/app/2663530/POOLS/) in VR with a [Meta Quest Pro](https://en.wikipedia.org/wiki/Meta_Quest_Pro) using my 3D avatar with [VMagicMirror](https://malaybaku.github.io/VMagicMirror/)
+
+[![VR to VTuber demo](https://img.youtube.com/vi/HoGuwVVNxmU/maxresdefault.jpg)](https://www.youtube.com/shorts/HoGuwVVNxmU)
+
 ## What you need
 
 - Windows
